@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { ThemeProvider } from "next-themes";
 import { BrowserRouter } from "react-router-dom";
 import { SoundProvider } from "./context/SoundContext";
+import { Analytics } from "@vercel/analytics/react";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -12,6 +13,7 @@ createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <SoundProvider>
           <App />
+          <Analytics />
         </SoundProvider>
       </BrowserRouter>
     </ThemeProvider>
