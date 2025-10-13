@@ -21,7 +21,7 @@ export function Boxes({ className = "" }: { className?: string }) {
   return (
     <div
       style={{
-        transform: `translate(-50%, -50%) skewX(-45deg) skewY(15deg) scale(0.8)`,
+        transform: `translate(-50%, -50%) skewX(-45deg) skewY(15deg) scale(1.2)`,
       }}
       className={`absolute top-1/2 left-1/2 flex h-[120vh] w-[120vw] ${className}`}
     >

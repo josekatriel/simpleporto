@@ -4,7 +4,8 @@ import PixelTransition from "../components/PixelTransition";
 import { useState } from "react";
 import { Boxes } from "../components/Boxes"; // new background
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Volume2, VolumeX } from "lucide-react";
+import { useSound } from "../context/SoundContext";
 
 const buttons = [
   { label: "My Work", to: "/work" },
@@ -14,15 +15,11 @@ const buttons = [
 export default function Home() {
   const [showContent, setShowContent] = useState(false);
   const { theme, setTheme } = useTheme();
-
-  const playClick = () => {
-    const audio = new Audio("/sounds/click.mp3");
-    audio.volume = 0.25;
-    audio.play();
-  };
+  const { play } = useSound();
+  const { muted, toggleMute } = useSound();
 
   const toggleTheme = () => {
-    playClick();
+    play("/sounds/click.mp3");
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
@@ -45,6 +42,22 @@ export default function Home() {
           <Sun className="w-5 h-5" />
         ) : (
           <Moon className="w-5 h-5" />
+        )}
+      </motion.button>
+
+      {/* 🔇 Sound Toggle Button */}
+      <motion.button
+        onClick={toggleMute}
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 200, damping: 10 }}
+        className="absolute top-5 right-16 p-2 rounded-md border border-border bg-card/70 backdrop-blur-sm shadow-sm hover:bg-primary hover:text-primary-foreground transition-colors z-20"
+        title={muted ? "Unmute sound" : "Mute sound"}
+      >
+        {muted ? (
+          <VolumeX className="w-5 h-5" />
+        ) : (
+          <Volume2 className="w-5 h-5" />
         )}
       </motion.button>
 
@@ -79,7 +92,7 @@ export default function Home() {
                 label={btn.label}
                 to={btn.to}
                 delay={0.1}
-                playClick={playClick}
+                playClick={() => play("/sounds/click.mp3")}
               />
             ))}
           </div>

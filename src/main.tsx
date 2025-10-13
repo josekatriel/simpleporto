@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App.tsx";
 import { ThemeProvider } from "next-themes";
 import { BrowserRouter } from "react-router-dom";
+import { SoundProvider } from "./context/SoundContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <BrowserRouter>
-        <App />
+        <SoundProvider>
+          <App />
+        </SoundProvider>
       </BrowserRouter>
     </ThemeProvider>
   </StrictMode>

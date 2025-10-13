@@ -5,6 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { useSound } from "../context/SoundContext";
 
 const projects = [
   {
@@ -46,6 +47,14 @@ const projects = [
       "Designed and developed a full-stack internal stock management system for client operations. Built with Go (backend), MongoDB, and React + Vite for a fast, maintainable interface.",
     category: "Web",
     tags: ["Go", "MongoDB", "React+Vite"],
+    images: [
+      "/images/stock1.png",
+      "/images/stock2.png",
+      "/images/stock3.png",
+      "/images/stock4.png",
+      "/images/stock5.png",
+      "/images/stock6.png",
+    ],
   },
   {
     year: "2024",
@@ -137,11 +146,7 @@ export default function Work() {
   const [showContent, setShowContent] = useState(false);
   const [filter, setFilter] = useState("All");
 
-  const playClick = () => {
-    const audio = new Audio("/sounds/click.mp3");
-    audio.volume = 0.25;
-    audio.play();
-  };
+  const { play } = useSound();
 
   const filtered =
     filter === "All" ? projects : projects.filter((p) => p.category === filter);
@@ -190,7 +195,7 @@ export default function Work() {
               value={filter}
               onChange={(f) => {
                 setFilter(f);
-                playClick();
+                play("/sounds/click.mp3");
               }}
             />
           </motion.div>
@@ -203,7 +208,11 @@ export default function Work() {
             className="my-36 pb-16 w-full max-w-5xl space-y-24"
           >
             {filtered.map((p, i) => (
-              <ProjectItem key={i} {...p} playClick={playClick} />
+              <ProjectItem
+                key={i}
+                {...p}
+                playClick={() => play("/sounds/click.mp3")}
+              />
             ))}
           </motion.div>
         </motion.div>

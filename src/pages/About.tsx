@@ -12,6 +12,7 @@ import { FaDiscord, FaYoutube, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import PixelTransition from "../components/PixelTransition";
 import { useState } from "react";
+import { useSound } from "../context/SoundContext";
 
 const ME_EMAIL = "work.josekatriel@gmail.com"; // TODO: replace
 const CV_URL = "/cv/cv.pdf"; // TODO: put your PDF in public/cv/
@@ -34,11 +35,7 @@ const fadeUp = (d = 0) => ({
 export default function About() {
   const [showContent, setShowContent] = useState(false);
 
-  const playClick = () => {
-    const audio = new Audio("/sounds/click.mp3");
-    audio.volume = 0.25;
-    audio.play();
-  };
+  const { play } = useSound();
 
   return (
     <motion.div
@@ -95,7 +92,7 @@ export default function About() {
             <a
               href={CV_URL}
               download
-              onMouseEnter={playClick}
+              onMouseEnter={() => play("/sounds/click.mp3")}
               className="px-3 py-2 bg-primary text-primary-foreground text-sm inline-flex items-center gap-2 hover:opacity-90 transition"
             >
               <FileDown className="w-4 h-4" /> Download CV
@@ -103,7 +100,7 @@ export default function About() {
 
             <Link
               to="/work"
-              onMouseEnter={playClick}
+              onMouseEnter={() => play("/sounds/click.mp3")}
               className="px-3 py-2 border text-sm inline-flex items-center gap-2 hover:bg-muted transition"
             >
               <ExternalLink className="w-4 h-4" /> View My Projects
@@ -114,7 +111,7 @@ export default function About() {
           <motion.section className="mt-12" {...fadeUp(0.25)}>
             <h2 className="text-lg font-heading font-semibold">Education</h2>
             <p className="text-sm text-muted-foreground mt-2">
-              Petra University — Sarjana Desain
+              2019 Petra Christian University - Bachelor of Design
             </p>
           </motion.section>
 
@@ -126,25 +123,25 @@ export default function About() {
                 href={YT_URL}
                 icon={<FaYoutube className="w-4 h-4" />}
                 label="YouTube · KatrGames"
-                onHover={playClick}
+                onHover={() => play("/sounds/click.mp3")}
               />
               <SocialLink
                 href={XKatr_URL}
                 icon={<FaXTwitter className="w-4 h-4" />}
                 label="Twitter / X KatrGames"
-                onHover={playClick}
+                onHover={() => play("/sounds/click.mp3")}
               />
               <SocialLink
                 href={DISCORD_INVITE}
                 icon={<FaDiscord className="w-4 h-4" />}
                 label="Discord Channel"
-                onHover={playClick}
+                onHover={() => play("/sounds/click.mp3")}
               />
               <SocialLink
                 href={X_URL}
                 icon={<FaXTwitter className="w-4 h-4" />}
                 label="Twitter / X Pixel Art"
-                onHover={playClick}
+                onHover={() => play("/sounds/click.mp3")}
               />
             </div>
           </motion.section>
@@ -184,7 +181,7 @@ export default function About() {
                     href={MODPACK_URL}
                     target="_blank"
                     rel="noreferrer"
-                    onMouseEnter={playClick}
+                    onMouseEnter={() => play("/sounds/click.mp3")}
                   >
                     Modpack Link <ExternalLink className="w-3 h-3" />
                   </a>
@@ -196,7 +193,7 @@ export default function About() {
                     href={DISCORD_MC_SERVER}
                     target="_blank"
                     rel="noreferrer"
-                    onMouseEnter={playClick}
+                    onMouseEnter={() => play("/sounds/click.mp3")}
                   >
                     Join <ExternalLink className="w-3 h-3" />
                   </a>
@@ -220,7 +217,7 @@ export default function About() {
                   href={`mailto:${ME_EMAIL}?subject=Project%20Inquiry`}
                   className="px-3 py-2 bg-primary text-primary-foreground text-sm inline-flex items-center gap-2 hover:opacity-90 transition
                   "
-                  onMouseEnter={playClick}
+                  onMouseEnter={() => play("/sounds/click.mp3")}
                 >
                   <Send className="w-4 h-4" /> Email Inquiry
                 </a>
@@ -229,7 +226,7 @@ export default function About() {
                   target="_blank"
                   rel="noreferrer"
                   className="px-3 py-2 border text-sm inline-flex items-center gap-2 hover:bg-muted transition"
-                  onMouseEnter={playClick}
+                  onMouseEnter={() => play("/sounds/click.mp3")}
                 >
                   <FaLinkedin className="w-4 h-4" /> Contact on LinkedIn
                 </a>
